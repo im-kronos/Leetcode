@@ -9,7 +9,6 @@ public:
             curr_sum=curr_sum+nums[i];
             curr_sum=max(curr_sum,nums[i]);
             max_sum=max(max_sum,curr_sum);
-           // curr_sum=max(curr_sum,nums[i]);
         }
         return max_sum;
 
