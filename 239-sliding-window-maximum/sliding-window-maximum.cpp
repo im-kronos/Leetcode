@@ -17,7 +17,8 @@ public:
         for(int i=k;i<nums.size();i++)
         {
             ans.push_back(nums[dq.front()]);  //print max for k set
-            //contacting
+
+            //contacting to maintian window from front
             while(!dq.empty() && dq.front()<=i-k)
             {
                 dq.pop_front();
