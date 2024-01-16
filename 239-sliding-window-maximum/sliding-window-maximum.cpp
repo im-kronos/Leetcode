@@ -14,7 +14,9 @@ public:
        for(int i=k;i<nums.size();i++)
        {
           
-           ms.erase(ms.find(nums[i-k]));
+           ms.erase(ms.find(nums[i-k]));  
+           //ms.erase() will reomve all instances while
+           //. ms.erase(ms.find(num)) will erase only one instance
            ms.insert(nums[i]);
            ans.push_back(*ms.rbegin());
 
