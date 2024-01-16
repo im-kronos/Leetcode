@@ -1,40 +1,25 @@
 class Solution {
 public:
     vector<int> maxSlidingWindow(vector<int>& nums, int k) {
-        deque<int>dq;
-        //for first k elements we are pushing i
-        vector<int>ans;
-        for(int i=0;i<k;i++)
-        {
-            while(!dq.empty() && nums[dq.back()]<nums[i])
-            {
-                dq.pop_back();
-            }
-            dq.push_back(i);
-        }
+       //using multiset
+       vector<int>ans;
+       multiset<int>ms;
+       for(int i=0;i<k;i++)
+       {
+           ms.insert(nums[i]);
+       }
+       //multiset will automatically sort on insert
 
-        //remaining from k
-        for(int i=k;i<nums.size();i++)
-        {
-            ans.push_back(nums[dq.front()]);  //print max for k set
+        ans.push_back(*ms.rbegin());
+       for(int i=k;i<nums.size();i++)
+       {
+          
+           ms.erase(ms.find(nums[i-k]));
+           ms.insert(nums[i]);
+           ans.push_back(*ms.rbegin());
 
-            //contacting to maintian window from front
-            while(!dq.empty() && dq.front()<=i-k)
-            {
-                dq.pop_front();
-            }
-            //expanding
-
-            while(!dq.empty() && nums[i]>nums[dq.back()])
-            {
-                dq.pop_back();
-            }
-            dq.push_back(i);
-        }
-
-
-        ans.push_back(nums[dq.front()]);
-
+       }
+    
         return ans;
     }
 };
