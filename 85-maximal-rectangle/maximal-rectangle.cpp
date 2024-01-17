@@ -1,8 +1,3 @@
-#include <iostream>
-#include <vector>
-
-using namespace std;
-
 class Solution {
 public:
     int maximalRectangle(vector<vector<char>>& matrix)
@@ -31,6 +26,14 @@ public:
       //to compute prev and next small elements
       int prev_small[matrix.size()][matrix[0].size()];
       int next_small[matrix.size()][matrix[0].size()];
+      for(int i=0;i<row;i++)
+      {
+          for(int j=0;j<col;j++)
+          {
+              prev_small[i][j]=0;
+              next_small[i][j]=0;
+          }
+      }
 
       stack<int>s1;
       stack<int>s2;
