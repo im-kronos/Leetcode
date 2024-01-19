@@ -6,7 +6,6 @@ public:
         {
             n=n&(n-1);   //update n where there is rightmost 1 {using n&(n-1)}
             cnt++;
-            cout<<n<<" ";
         }
         return cnt;
     }
