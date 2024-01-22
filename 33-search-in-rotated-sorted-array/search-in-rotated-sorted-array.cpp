@@ -31,37 +31,30 @@ public:
     }
 };
 
-/*class Solution
-{
-    public:
-        int search(vector<int> &nums, int target)
-        {
-            int s = 0;
-            int e = nums.size()-1;
-            int mid;
-            int ans;
-            while (s <= e)
-            {
-                mid = s + (e - s) / 2;
-                if (nums[mid] <= nums[mid - 1] && nums[mid] <= nums[mid + 1])
-                {
-                    ans = mid;
-                    break;
-                }
-                else
-                if (nums[mid] < nums[mid + 1] && nums[mid] > nums[mid + 1])
-                {
-                    s = mid;
-                }
-                else
-             	//  if (nums[mid] < nums[mid + 1] && nums[mid] > nums[mid - 1])
-                {
-                    e = mid;
-                }
-            }
 
-            return ans;
-        }
-};
+/* explanation
+       mid   /| 
+            / |
+ target    /  |
+          /   |
+start   /     |    end     
+              |   /
+              |  /  target
+              | /
+              |/ mid
 
-*/
+
+         mid
+          /
+ target. /.    => arr[s]<=arr[mid] => arr[s]<=target && target<=arr[mid]
+        /                                   end=mid-1;
+start. /                              else.  strat=mid+1
+
+
+          end     
+       /
+      /  target.  => arr[mid]<=arr[e] => arr[mid]<=traget && target<=arr[end]
+     /                                          start=mid+1
+    / mid                               else.  end=mid-1
+
+    */
