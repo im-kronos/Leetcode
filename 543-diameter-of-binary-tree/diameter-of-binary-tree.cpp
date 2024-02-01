@@ -26,7 +26,7 @@ public:
         int l=height(root->left);
         int r=height(root->right);
        
-
+        //it doesnt always go through root so think of other possibility
          int diameterThroughRoot = l + r;
         int diameterInLeftSubtree = diameterOfBinaryTree(root->left);
         int diameterInRightSubtree = diameterOfBinaryTree(root->right);
