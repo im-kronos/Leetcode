@@ -18,3 +18,22 @@ public:
         return dp[0];
     }
 };
+
+
+/*
+
+
+nums= 3 2 4 1 7 8 6 10 9
+len=  1 1 1 1 1 1 1  1 1 
+
+lower ones get added
+3->1
+2->1
+4-> has 3 so 1+1=2
+1->1
+7-> has 4 so 2+1=3
+8-> has 7 so 3+1=4
+6-> has 4 so 2+1=3
+10->has 8 so 4+1=5
+9-> has 8 so 4+1=5
+*/
