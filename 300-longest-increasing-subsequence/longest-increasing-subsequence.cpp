@@ -21,7 +21,7 @@ public:
 
 
 /*
-
+ we are asking previous elemnts how many elements are there which are less than the element
 
 nums= 3 2 4 1 7 8 6 10 9
 len=  1 1 1 1 1 1 1  1 1 
