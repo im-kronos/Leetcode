@@ -1,13 +1,20 @@
 class Solution {
 public:
     int findCenter(vector<vector<int>>& edges) {
-            if(edges[0][0] == edges[1][0] || edges[0][0] == edges[1][1])
-            {
-                return edges[0][0];
+        unordered_map<int, list<int>> l;
+
+        for (int i = 0; i < edges.size(); i++) {
+            l[edges[i][0]].push_back(edges[i][1]);
+            l[edges[i][1]].push_back(edges[i][0]);
+        }
+
+        int n = edges.size() + 1;  // Number of nodes in the tree
+        for (auto& ch : l) {
+            if (ch.second.size() == n - 1) {
+                return ch.first;
             }
-            else
-                return edges[0][1];
-            
-        return -1;
+        }
+
+        return -1;  // If no center is found
     }
 };
