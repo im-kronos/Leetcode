@@ -33,8 +33,8 @@ public:
     st.push(ch);
     // Add the current character to the 'inStack' set
     inStack.insert(ch);
+    
 }
-
 
         // Construct the result string from the stack
         string ans;
