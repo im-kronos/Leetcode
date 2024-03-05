@@ -1,24 +1,18 @@
-#include <string>
-
 class Solution {
 public:
-    int minimumLength(std::string s) {
-        int left = 0, right = s.length() - 1;
-
-        while (left < right && s[left] == s[right]) {
-            char current_char = s[left];
-
-          
-            while (left <= right && s[left] == current_char) {
-                left++;
-            }
-
-           
-            while (left <= right && s[right] == current_char) {
-                right--;
+    int minimumLength(string s) {
+        int i = 0 ; int j = s.size()-1;
+        while(i<j && s[i] == s[j])
+        {
+            char ch = s[i];
+            while(i < j && s[i] == ch)
+            {
+                i++;
+            }while(j >= i && s[j] == ch)
+            {
+                j--;
             }
         }
-
-        return right - left + 1;
+        return j-i+1;
     }
 };
