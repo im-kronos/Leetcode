@@ -1,17 +1,26 @@
 class Solution {
 public:
     int findMaxLength(vector<int>& nums) {
-        int n=nums.size(), n1=0, n0=0, len=0;
-        unordered_map<int, int> mp;
-        mp[0]=-1;
-        for(int i=0; i<n; i++){
-            n1+=nums[i];
-            n0=(i+1)-n1;
-            if (mp.count(n1-n0)!=0) 
-                len=max(len, i-mp[n1-n0]);
-            else 
-                mp[n1-n0]=i;
-        } 
-        return len;  
+        int n = nums.size();
+        unordered_map<int,int>mp;
+        mp[0] = -1;
+        int ans = 0;
+        int sum = 0;
+        for(int i=0;i<n;++i){
+            if(nums[i] == 0){
+                sum += -1;
+            }
+            else{
+                sum += 1;
+            } 
+            if(mp.find(sum) == mp.end()){
+                mp[sum] = i;
+            }
+            else{
+                //std::cout<<sum<<" "<<i<<" "<<mp[sum]<<std::endl;
+                ans = max(ans, i - mp[sum]);
+            }
+        }
+        return ans;
     }
 };
