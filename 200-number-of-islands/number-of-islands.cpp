@@ -11,7 +11,7 @@ public:
         // Mark current cell as visited
         grid[i][j] = '0';
 
-        //trverse
+        //trverse all nighbour ones
         check(grid,count,i+1,j);
         check(grid,count,i,j+1);
         check(grid,count,i-1,j);
@@ -24,7 +24,7 @@ public:
         {
             for(int j=0;j<grid[0].size();j++)
             {
-                if(grid[i][j]=='1')
+                if(grid[i][j]=='1') //each entire island is counted here
                 {
                     count+=check(grid,count,i,j);
                 }
