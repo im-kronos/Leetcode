@@ -1,6 +1,3 @@
-#include <vector>
-using namespace std;
-
 class Solution {
 private:
     void group(vector<vector<int>>& land, int r, int c, int& top, int& left, int& bottom, int& right) {
@@ -30,6 +27,7 @@ public:
         
         for (int i = 0; i < land.size(); ++i) {
             for (int j = 0; j < land[0].size(); ++j) {
+                //find the land to group it
                 if (land[i][j] == 1) {
                     int top = i, left = j, bottom = i, right = j;
                     group(land, i, j, top, left, bottom, right);
