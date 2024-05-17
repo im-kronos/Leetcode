@@ -1,33 +1,21 @@
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
+void remove_leaf_nodes(TreeNode*& root, int target) {
+    if (root == nullptr) { return; }
+    remove_leaf_nodes(root->left, target);
+    remove_leaf_nodes(root->right, target);
 
+    if (root->left != nullptr || root->right != nullptr) {
+        return; // not a leaf node
+    }
+    if (root->val != target) {
+        return; // value mismatch
+    }
+    root = nullptr;
+}
 
 class Solution {
 public:
     TreeNode* removeLeafNodes(TreeNode* root, int target) {
-        if (root == nullptr) {
-            return root; 
-        }
-        
-      
-        root->left = removeLeafNodes(root->left, target);
-        root->right = removeLeafNodes(root->right, target);
-        
-     
-        if (root->left == nullptr && root->right == nullptr && root->val == target) {
-            root=nullptr;
-            return root;
-        }
-        
-        return root; 
+        remove_leaf_nodes(root, target);
+        return root;
     }
 };
