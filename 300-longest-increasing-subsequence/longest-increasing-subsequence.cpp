@@ -1,39 +1,27 @@
 class Solution {
 public:
-
-    int lengthOfLIS(vector<int>& nums) {
-        vector<int>dp(nums.size(),1);
-        for(int n=1;n<nums.size();n++)
-        {
-            for(int i=0;i<n;i++)
-            {
-                if(nums[n]>nums[i])
-                {
-                    dp[n]=max(dp[n],dp[i]+1);
-                }
-            }
+    int lis(vector<int>& nums, int i, int prevIndex, vector<vector<int>>& dp) {
+        if (i == nums.size()) {
+            return 0;
         }
 
-        sort(dp.rbegin(),dp.rend());
-        return dp[0];
+        if (dp[i][prevIndex + 1] != -1) {
+            return dp[i][prevIndex + 1];
+        }
+        
+        int ans1 = 0;
+        if (prevIndex == -1 || nums[i] > nums[prevIndex]) {
+            ans1 = 1 + lis(nums, i + 1, i, dp);
+        }
+        
+        int ans2 = lis(nums, i + 1, prevIndex, dp);
+        
+        return dp[i][prevIndex + 1] = max(ans1, ans2);
+    }
+
+    int lengthOfLIS(vector<int>& nums) {
+        int n = nums.size();
+        vector<vector<int>> dp(n, vector<int>(n + 1, -1));
+        return lis(nums, 0, -1, dp);
     }
 };
-
-
-/*
- we are asking previous elemnts how many elements are there which are less than the element
-
-nums= 3 2 4 1 7 8 6 10 9
-len=  1 1 1 1 1 1 1  1 1 
-
-lower ones get added
-3->1
-2->1
-4-> has 3 so 1+1=2
-1->1
-7-> has 4 so 2+1=3
-8-> has 7 so 3+1=4
-6-> has 4 so 2+1=3
-10->has 8 so 4+1=5
-9-> has 8 so 4+1=5
-*/
