@@ -1,24 +1,35 @@
 class Solution {
 public:
-    vector<string> keypad{"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
-    vector<string> ans;  // Added declaration of ans vector
+    vector<string>keypad{""," ","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+    vector<string>ans;
+    
+    void solve(string digits,int i,string word)
+    {
+       if(i==digits.length())
+       {
+        ans.push_back(word);
+        return;
+       }
 
-    void generateAllString(string input, int i, string out) {
-        if (i == input.size()) {
-            ans.push_back(out);
-            return;
-        }
-        int digit = input[i] - '0';
-        if (digit == 0) return generateAllString(input, i + 1, out);
-        for (char c : keypad[digit]) {
-            generateAllString(input, i + 1, out + c);
-        }
+       int digit=digits[i]-'0';
+       if(digit==0)
+       {
+        solve(digits,i+1,word);
+       }
+       for(char ch:keypad[digit])
+       {
+        solve(digits,i+1,word+ch);
+       }
+
     }
 
+
     vector<string> letterCombinations(string digits) {
-        vector<string> out;
-        if(digits.empty()) return out;  // Added check for empty input
-        generateAllString(digits, 0, "");
-        return ans;  // Returning ans vector instead of out
+        if(digits=="")
+        {
+            return ans;
+        }
+        solve(digits,0,"");
+        return ans;
     }
 };
