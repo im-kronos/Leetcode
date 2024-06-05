@@ -16,14 +16,14 @@ public:
         string ans = "";
 
         for (int i = 0; i < s.size(); i++) {
-            string odd = expand(i, i, s);
-            if (odd.size() > ans.size()) {
-                ans = odd;
+            string str1 = expand(i, i, s);
+            if (str1.size() > ans.size()) {
+                ans = str1;
             }
 
-            string even = expand(i, i + 1, s);
-            if (even.size() > ans.size()) {
-                ans = even;
+            string str2 = expand(i, i + 1, s);
+            if (str2.size() > ans.size()) {
+                ans = str2;
             }
         }
 
