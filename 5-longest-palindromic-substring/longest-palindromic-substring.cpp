@@ -1,8 +1,7 @@
 class Solution {
 public:
-    string expand(int i, int j, string s) {
-        int left = i;
-        int right = j;
+    string expand(int left, int right, string s) {
+
 
         while (left >= 0 && right < s.size() && s[left] == s[right]) {
             left--;
