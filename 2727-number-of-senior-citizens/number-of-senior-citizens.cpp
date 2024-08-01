@@ -4,7 +4,7 @@ public:
         int count=0;
         for(auto det:details)
         {
-        int age=stoi(det.substr(11,2));
+        int age=(10*(det[11]-'0'))+(det[12]-'0');
         if(age>60)
         {
             count++;
