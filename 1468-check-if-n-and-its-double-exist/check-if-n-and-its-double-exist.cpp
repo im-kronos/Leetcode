@@ -12,7 +12,7 @@ public:
                     return true;
                 }
             } else {
-                if (mp.find(2 * num) != mp.end()) {
+                if  (mp.count(2 * num)) {
                     return true;
                 }
             }
