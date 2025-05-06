@@ -1,23 +1,20 @@
 class Solution {
 public:
-    void subset_maker(vector<int>& nums, int i, vector<int>& current, vector<vector<int>>& ans) {
-        if (i == nums.size()) {
-            ans.push_back(current);
-            return;
+    vector<vector<int>> rets;
+
+    void backtrack(vector<int>& nums, int index, vector<int>& curr) {
+        rets.push_back(curr);
+
+        for (int i = index; i < nums.size(); ++i) {
+            curr.push_back(nums[i]);              
+            backtrack(nums, i + 1, curr);         
+            curr.pop_back();                      
         }
-        
-
-        subset_maker(nums, i + 1, current, ans);
-
-        current.push_back(nums[i]);
-        subset_maker(nums, i + 1, current, ans);
-        current.pop_back(); 
     }
 
     vector<vector<int>> subsets(vector<int>& nums) {
-        vector<vector<int>> ans;
-        vector<int> current;
-        subset_maker(nums, 0, current, ans);
-        return ans;
+        vector<int> curr;
+        backtrack(nums, 0, curr);
+        return rets;
     }
 };
