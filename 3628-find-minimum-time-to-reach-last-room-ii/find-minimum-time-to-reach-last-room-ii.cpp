@@ -5,14 +5,11 @@ public:
     int minTimeToReach(vector<vector<int>>& moveTime) {
         int n = moveTime.size();
         int m = moveTime[0].size();
-
         priority_queue<State, vector<State>, greater<>> pq;
         pq.push({0, 0, 0, 0}); 
         vector<vector<vector<int>>> minTime(n, vector<vector<int>>(m, vector<int>(2, INT_MAX)));
         minTime[0][0][0] = 0;
-
         vector<pair<int, int>> directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
-
         while (!pq.empty()) {
             auto [currTime, row, col, stepType] = pq.top();
             pq.pop();
@@ -36,7 +33,6 @@ public:
                 }
             }
         }
-
-        return -1; // not reachable
+        return -1; 
     }
 };
