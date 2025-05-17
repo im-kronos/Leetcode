@@ -1,27 +1,21 @@
 class Solution {
 public:
+void sortColors(vector<int>& nums) {
+    int low = 0, mid = 0;
+    int high = nums.size() - 1;
 
-   void BSR(vector<int>&arr,int n,int i)
-   {
-       if(n==1)
-       {
-           return;
-       }
-       if(i==n-1)
-       {
-           BSR(arr,n-1,0);
-           return;
-       }
-       if(arr[i]>arr[i+1])
-       {
-           swap(arr[i],arr[i+1]);
-       }
-       BSR(arr,n,i+1);
-   }
-
-
-    void sortColors(vector<int>& nums) {
-        BSR(nums,nums.size(),0);
-
+    while (mid <= high) {
+        switch (nums[mid]) {
+            case 0:
+                swap(nums[low++], nums[mid++]);
+                break;
+            case 1:
+                mid++;
+                break;
+            case 2:
+                swap(nums[mid], nums[high--]);
+                break;
+        }
     }
+}
 };
