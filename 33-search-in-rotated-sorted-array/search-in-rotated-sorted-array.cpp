@@ -4,11 +4,6 @@ public:
         int left =0;
         int right = nums.size()-1;
         int mid;
-        if(nums.size()==1)
-        {
-            return (nums[left]==target)?left:-1;
-        }
-
         while (left <= right) {
             int mid = (left + right) / 2;
 
