@@ -1,60 +1,39 @@
 class Solution {
 public:
-    int search(vector<int>& arr, int k) {
-        int start = 0;
-        int size = arr.size();
-        int end = size-1;
-        while(start<=end){
-            int mid = (start+end)/2;
-            if(arr[mid]==k){
+    int search(vector<int>& nums, int target) {
+        int left =0;
+        int right = nums.size()-1;
+        int mid;
+        if(nums.size()==1)
+        {
+            return (nums[left]==target)?left:-1;
+        }
+
+        while (left <= right) {
+            int mid = (left + right) / 2;
+
+            if (nums[mid] == target) {
                 return mid;
             }
-            if(arr[start]<=arr[mid]){
-                if(arr[start]<=k && k<=arr[mid]){
-                    end = mid-1;
-                }
-                else{
-                    start = mid+1;
-                }
-            }
-            else{
-                if(arr[mid]<=k && k<=arr[end]){
-                    start = mid + 1;
-                }
-                else{
-                    end = mid-1;
+
+            if (nums[left] <= nums[mid]) {
+                //sorted
+                if (nums[left] <= target && target < nums[mid]) {
+                    right = mid - 1;
+                } else {
+                    left = mid + 1;
                 }
             }
-           
+            else {
+                //unsorted
+                if (nums[mid] < target && target <= nums[right]) {
+                    left = mid + 1;
+                } else {
+                    right = mid - 1;
+                }
+            }
         }
-        return -1;
+    return -1;
+        
     }
 };
-
-
-/* explanation
-       mid   /| 
-            / |
- target    /  |
-          /   |
-start   /     |    end     
-              |   /
-              |  /  target
-              | /
-              |/ mid
-
-
-         mid
-          /
- target. /.    => arr[s]<=arr[mid] => arr[s]<=target && target<=arr[mid]
-        /                                   end=mid-1;
-start. /                              else.  strat=mid+1
-
-
-          end     
-       /
-      /  target.  => arr[mid]<=arr[e] => arr[mid]<=traget && target<=arr[end]
-     /                                          start=mid+1
-    / mid                               else.  end=mid-1
-
-    */
