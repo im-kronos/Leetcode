@@ -1,35 +1,26 @@
 class Solution {
 public:
-   int solve(string &s1, string &s2, int m, int n,vector<vector<int>>&dp) {
-       // Base cases
-       if (m == 0) {
-           return n;
-       }
-       if (n == 0) {
-           return m;
-       }
+    int helper(string &word1, string &word2, int i, int j, vector<vector<int>> &dp) {
+        // Base Cases
+        if (i == word1.size()) return word2.size() - j;  
+        if (j == word2.size()) return word1.size() - i;  
+        if (dp[i][j] != -1) return dp[i][j];
 
-       if(dp[m][n]!=-1)
-       {
-           return dp[m][n];
-       }
-       
-       // If matching
-       if (s1[m - 1] == s2[n - 1]) {
-           return dp[m][n]= solve(s1, s2, m - 1, n - 1,dp);
-       }
-       
-       // Three operations
-       int op1 = dp[m][n]=1 + solve(s1, s2, m, n - 1,dp);
-       int op2 = dp[m][n]= 1 + solve(s1, s2, m - 1, n - 1,dp);
-       int op3 = dp[m][n]=1 + solve(s1, s2, m - 1, n,dp);
-       
-       return dp[m][n]=min(op1, min(op2, op3));
-   }
+        if (word1[i] == word2[j]) {
+            return dp[i][j] = helper(word1, word2, i + 1, j + 1, dp);
+        }
+
+        int insertOp = 1 + helper(word1, word2, i, j + 1, dp);
+        int deleteOp = 1 + helper(word1, word2, i + 1, j, dp);
+        int replaceOp = 1 + helper(word1, word2, i + 1, j + 1, dp);
+
+        return dp[i][j] = min({insertOp, deleteOp, replaceOp});
+    }
 
     int minDistance(string word1, string word2) {
-        vector<vector<int>>dp(word1.length()+1,vector<int>(word2.length()+1,-1));
-        int ans = solve(word1, word2, word1.length(), word2.length(),dp);
-        return ans;
+        int m = word1.size();
+        int n = word2.size();
+        vector<vector<int>> dp(m + 1, vector<int>(n + 1, -1));
+        return helper(word1, word2, 0, 0, dp);
     }
 };
