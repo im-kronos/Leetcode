@@ -1,24 +1,26 @@
 class Solution {
 public:
-    void subsetsHelper(vector<vector<int>>& ans, vector<int>& nums, vector<int>& temp, int index, int n) {
-        if (index >= n) {
+    
+    void helper(vector<int>&nums, int i , vector<vector<int>>&ans , vector<int>&temp){
+        if( i == nums.size())
+        {
             ans.push_back(temp);
             return;
         }
-
-        // Exclude 
-        subsetsHelper(ans, nums, temp, index + 1, n);
-        // Include 
-        temp.push_back(nums[index]);
-        subsetsHelper(ans, nums, temp, index + 1, n);
-        // Backtrack
+        
+        helper(nums,i+1, ans,temp);
+        temp.push_back(nums[i]);
+        helper(nums,i+1, ans,temp);
         temp.pop_back();
     }
+  
+
 
     vector<vector<int>> subsets(vector<int>& nums) {
-        vector<vector<int>> ans;
-        vector<int> temp;
-        subsetsHelper(ans, nums, temp, 0, nums.size());
+        vector<vector<int>>ans;
+        vector<int>temp;
+        helper(nums, 0, ans,temp);
         return ans;
+        
     }
 };
