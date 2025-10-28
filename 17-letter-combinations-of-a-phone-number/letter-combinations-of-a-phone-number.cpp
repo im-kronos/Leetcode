@@ -1,35 +1,25 @@
 class Solution {
 public:
-    vector<string>keypad{""," ","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
-    vector<string>ans;
-    
-    void solve(string digits,int i,string word)
-    {
-       if(i==digits.length())
-       {
-        ans.push_back(word);
-        return;
-       }
-
-       int digit=digits[i]-'0';
-       if(digit==0)
-       {
-        solve(digits,i+1,word);
-       }
-       for(char ch:keypad[digit])
-       {
-        solve(digits,i+1,word+ch);
-       }
-
-    }
-
-
+    vector<string> keypad{" "," ","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+    vector<string> ans;
     vector<string> letterCombinations(string digits) {
-        if(digits=="")
-        {
-            return ans;
+        for(auto t:keypad[digits[0]-'0']){
+            string s(1, t); 
+            ans.push_back(s);
         }
-        solve(digits,0,"");
+
+        for(int i=1;i<digits.size();i++) {
+            vector<string>temp;
+            for(auto t:keypad[digits[i]-'0'])
+            {
+                for(auto a:ans)
+                {
+                    temp.push_back(a+t);
+                }
+            }
+            ans.clear();
+            ans = temp;
+        }
         return ans;
     }
 };
